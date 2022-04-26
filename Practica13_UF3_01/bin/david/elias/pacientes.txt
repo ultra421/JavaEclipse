@@ -1,0 +1,23 @@
+AAAAAACAAAAAAAB
+CCCCCCCC37122Codigo Paciente: Pac1
+Nombre: Kaido
+Edad: 59
+Enfermedad:Depresion
+Gravedad:Media
+Observacion:Necesita ayuda de un psicologo
+Codigo Paciente: Pac2
+Nombre: Linlin
+Edad: 68
+Enfermedad:Covid
+Gravedad:Moderada
+Observacion:Descanso y confinamiento
+Nombre: Torao
+Edad: 28
+Enfermedad:Envenenamiento
+Gravedad:Media
+Observacion:Necesita ser drenado con suero
+Nombre: Hiruluk
+Edad: 68
+Enfermedad:Cirrosis
+Gravedad:Leve
+Observacion:Debe de hidratarse con agua mineral
