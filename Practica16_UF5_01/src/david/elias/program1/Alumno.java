@@ -1,4 +1,4 @@
-package david.elias;
+package david.elias.program1;
 
 public class Alumno {
 	
