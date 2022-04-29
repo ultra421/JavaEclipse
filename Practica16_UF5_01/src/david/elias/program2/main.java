@@ -1,46 +1,50 @@
 package david.elias.program2;
 
-import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
-	
-	static int pedirNumero() {
-		
+
+	static int pedirNumero() throws NumberFormatException {
+
 		while (true) {
-		
+
 			try {
-				
+
 				System.out.print("Escribe un numero:");
 				Scanner scan = new Scanner(System.in);
 				return scan.nextInt();
-				
+
 			} catch (NumberFormatException e) {
-				System.out.println("Tienes que escribir un numero!");
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
+				throw new NumberFormatException();
+			} catch (InputMismatchException e) {
+				throw new NumberFormatException();
 			}
-		
 		}
-		
+
 	}
-	
-	public static void main (String args[]) {
-		
+
+	public static void main(String args[]) {
+
 		int suma = 0;
 		
-		try {
-			
-			for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 5; i++) {
+	
+			try {
+	
 				suma += pedirNumero();
+	
+			} catch (NumberFormatException e) {
+	
+				System.out.println("Resultado final = ");
+				break;
+	
+			} finally {
+				System.out.println("La suma es = " + suma);
 			}
 			
-		} catch (NumberFormatException e) {
-			System.out.println(e.getMessage());
-		} finally {
-			System.out.println("La suma es = " + suma);
 		}
-		
+
 	}
 
 }
