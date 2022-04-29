@@ -1,32 +1,46 @@
 package david.elias.program2;
+
 import java.io.IOException;
 import java.util.Scanner;
 
-public class main {
+public class Main {
 	
-	int pedirNumero() {
-		
-		System.out.println("Escribe un numero");
+	static int pedirNumero() {
 		
 		while (true) {
-			
+		
 			try {
 				
+				System.out.print("Escribe un numero:");
 				Scanner scan = new Scanner(System.in);
 				return scan.nextInt();
 				
-			} catch (IOException e) {
-				System.out.print("Escribe un numero correcto\nNumero:");
+			} catch (NumberFormatException e) {
+				System.out.println("Tienes que escribir un numero!");
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
 			}
-			
+		
 		}
 		
 	}
-
-	public static void main(String[] args) {
+	
+	public static void main (String args[]) {
 		
+		int suma = 0;
 		
-
+		try {
+			
+			for (int i = 0; i < 5; i++) {
+				suma += pedirNumero();
+			}
+			
+		} catch (NumberFormatException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			System.out.println("La suma es = " + suma);
+		}
+		
 	}
 
 }
