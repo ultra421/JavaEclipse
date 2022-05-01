@@ -1,7 +1,5 @@
 package gui;
 
-import java.awt.Point;
-
 import javax.swing.*;
 
 public class Main {

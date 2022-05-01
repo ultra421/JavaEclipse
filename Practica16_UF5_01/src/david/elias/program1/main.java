@@ -3,6 +3,9 @@ package david.elias.program1;
 import java.util.Scanner;
 
 public class main {
+	
+	// Para comprovar que la String introducida para el nombre no contenga nombres he creado este metodo
+	// Pasa caracter por caracter y utiliza el metodo isDigit de Character que devuelve true si es un numero
 
 	static boolean hasNumber(String input) {
 
@@ -21,6 +24,8 @@ public class main {
 	}
 
 	public static void main(String[] args) {
+		
+		//Todos los bucles de introduccion estan true mientras haya menos de cinco errores
 		
 		int errores = 0;
 		Alumno alumnos[] = new Alumno[2];
@@ -52,12 +57,15 @@ public class main {
 				Scanner scan = new Scanner(System.in);
 				System.out.println("Introduce la edad");
 
+				// Scanner tira error si lo introducido no cumple con el formato de la variable
+				
 				try {
 					
 					edad = scan.nextInt();
 					break;
 					
 				} catch (java.util.InputMismatchException e) {
+					//Catchear error y sumar a la cantidad total
 					errores++;
 					System.out.println("Introduce una edad valida");
 				}
@@ -65,6 +73,8 @@ public class main {
 			}
 
 			while (errores < 5) { // Check altura
+				
+				// Lo mismo que edad
 
 				Scanner scan = new Scanner(System.in);
 				System.out.println("Introduce la altura");

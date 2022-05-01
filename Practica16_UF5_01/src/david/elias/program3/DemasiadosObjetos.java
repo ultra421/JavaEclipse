@@ -10,6 +10,7 @@ public class DemasiadosObjetos extends Throwable {
 		
 	}
 	
+	// Texto que sera imprimido
 	@Override
 	public String toString () {
 		return "Hay demasiados objetos! Cantidad de objetos: " + cantidad;
