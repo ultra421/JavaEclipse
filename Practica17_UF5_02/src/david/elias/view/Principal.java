@@ -5,6 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import david.elias.model.Author;
+import david.elias.model.Book;
+import java.util.ArrayList;
 
 public class Principal extends JFrame implements ActionListener {
 	
@@ -15,6 +18,7 @@ public class Principal extends JFrame implements ActionListener {
 	JButton modifyBook;
 	JButton removeBook;
 	JButton searchBook;
+	ArrayList<Book> Books = new ArrayList<Book>();
 	
 	public Principal () {
 		
@@ -61,7 +65,11 @@ public class Principal extends JFrame implements ActionListener {
 		
 		if (e.getSource() == newAuthor) {
 			
+			new NewAuthor();
+			
 		} else if (e.getSource() == modifyAuthor) {
+			
+			
 			
 		} else if (e.getSource() == removeAuthor) {
 			
