@@ -9,6 +9,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.JComboBox;
+
 import david.elias.exception.AuthorException;
 import david.elias.model.Author;
 
@@ -106,7 +108,7 @@ public class AuthorController {
 			e.printStackTrace();
 		}
 		
-		//TODO: delet this
+		//TODO: debug delet this
 		System.out.print(printAuthors());
 		
 	}
@@ -127,6 +129,52 @@ public class AuthorController {
 		}
 		
 		return output;
+		
+	}
+	
+	public Author getAuthor(String nombre, String surname1, String surname2) {
+		
+		for (int i = 0; i < authors.size(); i++) {
+			
+			Author tempAuthor = authors.get(i); // devolver author find
+			
+			if (tempAuthor.getName() == nombre &&
+				tempAuthor.getSurname() == surname1 &&
+				tempAuthor.getSurname2() == surname2) {
+				
+				return tempAuthor;
+				
+			}
+			
+		}
+		
+		return new Author();
+		
+	}
+	
+	public Author getAuthorById(int id) {
+		
+		return authors.get(id);
+		
+	}
+	
+	public String [] getAuthorList() throws AuthorException {
+		
+		String combo [] = new String [authors.size()];
+		
+		for (int i = 0; i < authors.size(); i++) {
+			
+			combo[i] = (authors.get(i).getName() + " " + authors.get(i).getSurname() + " " + authors.get(i).getSurname2());
+			
+		}
+		
+		if (combo.length == 0) {
+			System.out.println("No authors"); //TODO: <- Delet dbug
+			throw new AuthorException();
+		} else {
+			System.out.println("Yes autors");
+			return combo;
+		}
 		
 	}
 

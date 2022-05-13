@@ -59,14 +59,12 @@ public class NewAuthor extends Ventana implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		
 		if (e.getSource() == submit) {
-			System.out.print("Autor send:" + nombreAutor.getText() + apellido1Autor.getText() + apellido2Autor.getText() + pais.getText());
+			System.out.println("Autor send:" + nombreAutor.getText() + apellido1Autor.getText() + apellido2Autor.getText() + pais.getText());
 			AuthorController control = new AuthorController();
 			try {
 				control.addAuthor(new Author(nombreAutor.getText(),apellido1Autor.getText(),apellido2Autor.getText(),pais.getText()));
 			} catch (AuthorException e1) {
-				
 				JOptionPane.showMessageDialog(this, "No pueden haber dos autores con el mismo nombre y apellidos");
-				
 			}
 		} else if (e.getSource() == cancel) {
 			dispose();

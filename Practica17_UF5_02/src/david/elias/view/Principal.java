@@ -69,7 +69,7 @@ public class Principal extends JFrame implements ActionListener {
 			
 		} else if (e.getSource() == modifyAuthor) {
 			
-			
+			new ModifyAuthor();
 			
 		} else if (e.getSource() == removeAuthor) {
 			
