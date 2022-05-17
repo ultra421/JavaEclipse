@@ -99,6 +99,8 @@ public class ModifyAuthor extends Principal implements ActionListener {
 			
 		} else if (e.getSource() == submit) {
 			
+			//TODO: wtf es esto, haber usado .set y ya
+			
 			Author clickedAuthor = (Author)authorList.getSelectedItem();
 			String nombre = nombreAutor.getText();
 			String apellido = apellido1Autor.getText();

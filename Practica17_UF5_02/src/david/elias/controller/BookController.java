@@ -16,20 +16,23 @@ import david.elias.view.Principal;
 
 public class BookController {
 	
+	ArrayList <Author> authors;
 	ArrayList <Book> books;
 	File file;
 	PrintWriter filePrint;
 	FileReader fileRead;
 	
-	public BookController() {
+	public BookController(ArrayList<Author> authors) {
 		
 		System.out.println("------Books------");
+		this.authors = authors;
+		System.out.println("Recieved authors from authorController!");
 		this.books = Principal.books;
 		file = new File("books.txt");
 		System.out.println("Checking existing file...");
 		checkExistFile();
-//		System.out.println("Reading books...");
-//		readBooks();
+		System.out.println("Reading books...");
+		readBooks();
 		System.out.println("Initiating printer");
 		initWriterReader();
 		
@@ -69,20 +72,17 @@ public class BookController {
 			while (scanFile.hasNextLine()) {
 				
 				String tempString = scanFile.nextLine();
-				Author tempAuthor;
 				String params[] = tempString.split("\\.");
-				//Pos	0		1			2		3	  	4,5,6,7
+				//Pos		0		1		2		3	  	4,5,6,7
 				//Campo | ISBN | TITULO | PAGINAS | GENERO | AUTOR
-				//		  int	 String    int       String  Autor
+				//Tipo	  int	 String    int       String  Autor
 			
 				int isbn = Integer.parseInt(params[0]);
 				String titulo = params[1];
 				int paginas = Integer.parseInt(params[2]);
 				String genero = params[3];
 				
-				//TODO: Maybe cambiar esto y de alguna manera recibir el contorler de princiapl
-				AuthorController tempAuthControl = new AuthorController();
-				Author autor = tempAuthControl.getAuthor(params[4],params[5],params[6]);
+				Author autor = getAuthor(params[4],params[5],params[6]);
 				
 				Book bookToAdd = new Book(isbn,titulo,paginas,genero,autor);
 				books.add(bookToAdd);
@@ -96,6 +96,26 @@ public class BookController {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	private Author getAuthor(String nombre, String surname1, String surname2) {
+
+		for (int i = 0; i < authors.size(); i++) {
+
+			Author tempAuthor = authors.get(i); // devolver author find
+
+			if (tempAuthor.getName().equals(nombre) && tempAuthor.getSurname().equals(surname1)
+					&& tempAuthor.getSurname2().equals(surname2)) {
+
+				return tempAuthor;
+
+			}
+
+		}
+
+		System.out.println("Author couldn't be found with name" + nombre + surname1 + surname2);
+		return new Author();
+
 	}
 	
 	public void printToFile() {
@@ -146,6 +166,26 @@ public class BookController {
 		}
 		
 		return false;
+		
+	}
+	
+	public ArrayList<Book> getBookArray(Author author, String genre) {
+		
+		ArrayList<Book> returnArray = new ArrayList<Book>();
+		
+		for (int i = 0; i < books.size(); i++) {
+			
+			Book currentBook = books.get(i);
+			
+			if (currentBook.getAutor() == author && currentBook.getGenero().equals(genre)) {
+				
+				returnArray.add(currentBook);
+				
+			}
+			
+		}
+		
+		return returnArray;
 		
 	}
 

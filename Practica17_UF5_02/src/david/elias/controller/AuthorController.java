@@ -31,6 +31,7 @@ public class AuthorController {
 		readAuthors();
 		System.out.println("Initiating printer");
 		initWriterReader();
+		System.out.println("Trying to send bookControl the authors...");
 
 	}
 
@@ -161,17 +162,18 @@ public class AuthorController {
 
 			Author tempAuthor = authors.get(i); // devolver author find
 
-			if (tempAuthor.getName() == nombre && tempAuthor.getSurname() == surname1
-					&& tempAuthor.getSurname2() == surname2) {
+			if (tempAuthor.getName().equals(nombre) && tempAuthor.getSurname().equals(surname1)
+					&& tempAuthor.getSurname2().equals(surname2)) {
 
 				return tempAuthor;
 
 			}
 
 		}
-
+		
+		System.out.println("Author couldn't be found with name" + nombre + surname1 + surname2);
 		return new Author();
-
+		
 	}
 
 	public Author getAuthorById(int id) {

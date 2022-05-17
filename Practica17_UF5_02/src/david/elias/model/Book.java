@@ -57,7 +57,7 @@ public class Book {
 	}
 	
 	public String toString() {
-		return isbn + " " + titulo + " " + autor;
+		return isbn + " " + titulo;
 	}
 	
 	public String toStringFile() {

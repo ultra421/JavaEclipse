@@ -92,9 +92,9 @@ public class NewLibro extends Principal implements ActionListener {
 			Book bookToAdd = new Book(newIsbn,newTitulo,newPaginas,newGenero,authorToAdd);
 			try {
 				bookControl.addBook(bookToAdd);
+				isbn.setText(Integer.toString(newIsbn++));
 			} catch (BookException e1) {
 				JOptionPane.showMessageDialog(newLibro, "No pueden haber dos libros con el mismo ISBN");
-				newLibro.dispose();
 			}
 			
 		} else if (e.getSource() == cancel) {

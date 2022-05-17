@@ -37,9 +37,9 @@ public class Principal implements ActionListener, WindowListener {
 		books = new ArrayList<Book>();
 		//Añadira los autores existentes a la array
 		authorControl = new AuthorController();
+		//authorControl llena la array de Autores, entonces enviar a bookControl
 		//Añadira los libros existentes a la array
-		bookControl = new BookController();
-		
+		bookControl = new BookController(authors);	
 		mainFrame = new JFrame("Biblioteca");
 		mainFrame.setLayout(new FlowLayout());
 		mainFrame.setSize(500,500);
