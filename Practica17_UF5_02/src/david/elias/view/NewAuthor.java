@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -12,25 +13,24 @@ import david.elias.controller.AuthorController;
 import david.elias.exception.AuthorException;
 import david.elias.model.Author;
 
-public class NewAuthor extends Ventana implements ActionListener {
+public class NewAuthor extends Principal implements ActionListener {
 	
-	JTextField nombreAutor;
-	JTextField apellido1Autor;
-	JTextField apellido2Autor;
-	JTextField pais;
+	JDialog newAuthor;
+	JTextField nombreAutor, apellido1Autor, apellido2Autor, pais;
 	JButton submit;
 	JButton cancel;
 	
 	public NewAuthor () {
 		
-		super();
-		setSize(400,150);
-		
 	}
 	
+	@Override
 	public void buildVentana () {
 		
-		this.setLayout(new GridLayout(5,2,4,4));
+		newAuthor = new JDialog(super.mainFrame, "Add author");
+		newAuthor.setLayout(new GridLayout(5,2,4,4));
+		newAuthor.setSize(400,400);
+		
 		nombreAutor = new JTextField();
 		apellido1Autor = new JTextField();
 		apellido2Autor = new JTextField();
@@ -42,16 +42,18 @@ public class NewAuthor extends Ventana implements ActionListener {
 		cancel.setPreferredSize(new Dimension(75,40));
 		cancel.addActionListener(this);
 		
-		add(new JLabel("Nombre Autor"));
-		add(nombreAutor);
-		add(new JLabel("Apellido autor"));
-		add(apellido1Autor);
-		add(new JLabel("2ndo apellido autor"));
-		add(apellido2Autor);
-		add(new JLabel("Pais"));
-		add(pais);
-		add(submit);
-		add(cancel);
+		newAuthor.add(new JLabel("Nombre Autor"));
+		newAuthor.add(nombreAutor);
+		newAuthor.add(new JLabel("Apellido autor"));
+		newAuthor.add(apellido1Autor);
+		newAuthor.add(new JLabel("2ndo apellido autor"));
+		newAuthor.add(apellido2Autor);
+		newAuthor.add(new JLabel("Pais"));
+		newAuthor.add(pais);
+		newAuthor.add(submit);
+		newAuthor.add(cancel);
+		
+		newAuthor.setVisible(true);
 		
 	}
 	
@@ -60,14 +62,15 @@ public class NewAuthor extends Ventana implements ActionListener {
 		
 		if (e.getSource() == submit) {
 			System.out.println("Autor send:" + nombreAutor.getText() + apellido1Autor.getText() + apellido2Autor.getText() + pais.getText());
-			AuthorController control = new AuthorController();
 			try {
-				control.addAuthor(new Author(nombreAutor.getText(),apellido1Autor.getText(),apellido2Autor.getText(),pais.getText()));
+				authorControl.addAuthor(new Author(nombreAutor.getText(),apellido1Autor.getText(),apellido2Autor.getText(),pais.getText()));
 			} catch (AuthorException e1) {
-				JOptionPane.showMessageDialog(this, "No pueden haber dos autores con el mismo nombre y apellidos");
+				JOptionPane.showMessageDialog(newAuthor, "No pueden haber dos autores con el mismo nombre y apellidos");
+				System.out.println("Author alredy exist");
 			}
+			
 		} else if (e.getSource() == cancel) {
-			dispose();
+			newAuthor.dispose();
 		}
 		
 	}

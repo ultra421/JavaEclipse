@@ -6,9 +6,9 @@ public class Book {
 	String titulo;
 	int paginas;
 	String genero;
-	String autor;
+	Author autor;
 	
-	public Book(int isbn, String titulo, int paginas, String genero, String autor) {
+	public Book(int isbn, String titulo, int paginas, String genero, Author autor) {
 		this.isbn = isbn;
 		this.titulo = titulo;
 		this.paginas = paginas;
@@ -48,12 +48,20 @@ public class Book {
 		this.genero = genero;
 	}
 
-	public String getAutor() {
+	public Author getAutor() {
 		return autor;
 	}
 
-	public void setAutor(String autor) {
+	public void setAutor(Author autor) {
 		this.autor = autor;
+	}
+	
+	public String toString() {
+		return isbn + " " + titulo + " " + autor;
+	}
+	
+	public String toStringFile() {
+		return isbn + "." + titulo + "." + paginas + "." + genero + "." + autor.toStringFile();
 	}
 
 }
