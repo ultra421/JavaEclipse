@@ -5,7 +5,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -17,6 +16,7 @@ import david.elias.exception.AuthorException;
 import david.elias.exception.BookException;
 import david.elias.model.Author;
 import david.elias.model.Book;
+import david.elias.exception.MatchingException;
 
 public class SearchLibro extends Principal implements ActionListener{
 	
@@ -44,7 +44,7 @@ public class SearchLibro extends Principal implements ActionListener{
 		searchPanel.setSize(400,150);
 		JPanel resultPanel = new JPanel (new GridLayout(5,2));
 		resultPanel.setSize(400,350);
-		JPanel movePanel = new JPanel (new GridLayout(1,3));
+		JPanel movePanel = new JPanel (new FlowLayout());
 		movePanel.setSize(400,100);
 		
 		//Establecer componentes
@@ -83,12 +83,16 @@ public class SearchLibro extends Principal implements ActionListener{
 			// Botones
 			search = new JButton("Search");
 			search.addActionListener(this);
+			search.setSize(75,40);
 			back = new JButton("Backward");
 			back.addActionListener(this);
+			back.setSize(75,40);
 			forward = new JButton("Forward");
 			forward.addActionListener(this);
+			forward.setSize(75,40);
 			cancel = new JButton("Cancel");
 			cancel.addActionListener(this);
+			cancel.setSize(75,40);
 			back.setEnabled(false);
 			forward.setEnabled(false);
 			
@@ -156,7 +160,7 @@ public class SearchLibro extends Principal implements ActionListener{
 	}
 	
 	//TODO: add custom exception
-	private void updateFields() throws Exception {
+	private void updateFields() throws MatchingException {
 		
 		if (arrayPos == 0 && matchBooks.size() < 2) {
 			back.setEnabled(false);
@@ -173,7 +177,7 @@ public class SearchLibro extends Principal implements ActionListener{
 		}
 		
 		if (matchBooks.size() == 0) {
-			throw new Exception();
+			throw new MatchingException((Author)authorList.getSelectedItem(),(String)genreList.getSelectedItem());
 		}
 		
 		Book currentBook = matchBooks.get(arrayPos);
@@ -221,7 +225,8 @@ public class SearchLibro extends Principal implements ActionListener{
 				
 			}
 		//Custom exception
-		} catch (Exception e1) {
+		} catch (MatchingException e1) {
+			e1.toString();
 			JOptionPane.showMessageDialog(searchBook, "No hay ningun libro de esta combinacion");
 			setEmptyFields();
 		}
