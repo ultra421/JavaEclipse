@@ -1,6 +1,5 @@
 package david.elias.view;
 
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,11 +13,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import david.elias.exception.AuthorException;
-import david.elias.exception.BookException;
+import david.elias.exception.MatchingException;
 import david.elias.model.Author;
 import david.elias.model.Book;
 
-public class SearchLibro extends Principal implements ActionListener{
+public class SearchBook extends Main implements ActionListener{
 	
 	JComboBox <String> genreList;
 	JComboBox <Author> authorList;
@@ -28,11 +27,11 @@ public class SearchLibro extends Principal implements ActionListener{
 	JDialog searchBook;
 	int arrayPos;
 	
-	SearchLibro () {
+	SearchBook () {
 		
 	}
 	
-	void buildVentana() {
+	void buildWindow() {
 		
 		//Estructura principal
 		
@@ -155,8 +154,7 @@ public class SearchLibro extends Principal implements ActionListener{
 		
 	}
 	
-	//TODO: add custom exception
-	private void updateFields() throws Exception {
+	private void updateFields() throws MatchingException {
 		
 		if (arrayPos == 0 && matchBooks.size() < 2) {
 			back.setEnabled(false);
@@ -173,7 +171,7 @@ public class SearchLibro extends Principal implements ActionListener{
 		}
 		
 		if (matchBooks.size() == 0) {
-			throw new Exception();
+			throw new MatchingException();
 		}
 		
 		Book currentBook = matchBooks.get(arrayPos);
@@ -221,8 +219,8 @@ public class SearchLibro extends Principal implements ActionListener{
 				
 			}
 		//Custom exception
-		} catch (Exception e1) {
-			JOptionPane.showMessageDialog(searchBook, "No hay ningun libro de esta combinacion");
+		} catch (MatchingException e1) {
+			JOptionPane.showMessageDialog(searchBook, "No books exisit with this combination");
 			setEmptyFields();
 		}
 		

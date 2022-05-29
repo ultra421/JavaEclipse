@@ -9,26 +9,24 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import david.elias.exception.AuthorException;
 import david.elias.exception.BookException;
-import david.elias.model.Author;
 import david.elias.model.Book;
 
-public class RemoveLibro extends Principal {
+public class RemoveBook extends Main {
 
 	JDialog removeBook;
 	JComboBox<Book>bookList;
 	JButton submit, cancel;
 	JPanel panelButtons;
 
-	public RemoveLibro() {
+	public RemoveBook() {
 
 	}
 
 	@Override
-	public void buildVentana() {
+	public void buildWindow() {
 
-		removeBook = new JDialog(super.mainFrame, "Delete author");
+		removeBook = new JDialog(mainFrame, "Delete author");
 		removeBook.setSize(400, 250);
 		removeBook.setLayout(new GridLayout(2, 1));
 
@@ -59,7 +57,7 @@ public class RemoveLibro extends Principal {
 			removeBook.setVisible(true);
 
 		} catch (BookException e) { // Exception si no hay ningun libro
-			JOptionPane.showMessageDialog(removeBook, "No hay ningun libro");
+			JOptionPane.showMessageDialog(removeBook, "No books");
 			removeBook.dispose();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(removeBook, "Unknown Error");
@@ -74,9 +72,9 @@ public class RemoveLibro extends Principal {
 
 			books.remove(bookList.getSelectedItem());
 		
-			if (authors.size() == 0) {
+			if (books.size() == 0) {
 
-				JOptionPane.showMessageDialog(removeBook, "No queda ningun autor");
+				JOptionPane.showMessageDialog(removeBook, "No books left");
 				removeBook.dispose();
 
 			} 

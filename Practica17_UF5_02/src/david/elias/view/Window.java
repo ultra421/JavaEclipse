@@ -1,17 +1,13 @@
 package david.elias.view;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class Ventana extends JDialog implements ActionListener {
+@SuppressWarnings("serial")
+public class Window extends JDialog implements ActionListener {
 	
-	public Ventana () {
+	public Window () {
 		
 		setSize(500,500);
 		setVisible(true);

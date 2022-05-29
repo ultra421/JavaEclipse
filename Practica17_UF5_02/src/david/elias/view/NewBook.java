@@ -1,6 +1,5 @@
 package david.elias.view;
 
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,30 +9,29 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import david.elias.controller.AuthorController;
 import david.elias.exception.AuthorException;
 import david.elias.exception.BookException;
 import david.elias.model.Author;
 import david.elias.model.Book;
 
-public class NewLibro extends Principal implements ActionListener {
+public class NewBook extends Main implements ActionListener {
 	
 	JDialog newLibro;
 	JTextField isbn, titulo, paginas, genero;
-	JComboBox authorList;
+	JComboBox<Author> authorList;
 	JButton submit, cancel;
 	
-	public NewLibro () { //Llama a buildVentana automaticamente por el super
+	public NewBook () { // calls buildWindow
 		
 	}
 	
 	@Override
-	void buildVentana() {
+	void buildWindow() {
 		
 		try {
 			
 			Author tempAuthors [] = authors.toArray(new Author [authors.size()]);
-			authorList = new JComboBox(tempAuthors);
+			authorList = new JComboBox<Author>(tempAuthors);
 			authorList.addActionListener(this);
 			
 			if (tempAuthors.length == 0) {
@@ -42,12 +40,12 @@ public class NewLibro extends Principal implements ActionListener {
 			
 		} catch (AuthorException e) {
 			
-			JOptionPane.showMessageDialog(modifyAuthor, "No hay ningun autor");
+			JOptionPane.showMessageDialog(modifyAuthor, "No authors");
 			newLibro.dispose();
 			
 		}
 		
-		newLibro = new JDialog(super.mainFrame,"Crear un nuevo libro");
+		newLibro = new JDialog(mainFrame,"Create new book");
 		newLibro.setSize(500,400);
 		newLibro.setLayout(new GridLayout(6,2,4,4));
 		
@@ -63,13 +61,13 @@ public class NewLibro extends Principal implements ActionListener {
 		
 		newLibro.add(new JLabel("ISBN"));
 		newLibro.add(isbn);
-		newLibro.add(new JLabel("Titulo"));
+		newLibro.add(new JLabel("Title"));
 		newLibro.add(titulo);
-		newLibro.add(new JLabel("Paginas"));
+		newLibro.add(new JLabel("Pages"));
 		newLibro.add(paginas);
-		newLibro.add(new JLabel("Genero"));
+		newLibro.add(new JLabel("Gender"));
 		newLibro.add(genero);
-		newLibro.add(new JLabel("Autor"));
+		newLibro.add(new JLabel("Author"));
 		newLibro.add(authorList);
 		newLibro.add(submit);
 		newLibro.add(cancel);
@@ -83,18 +81,22 @@ public class NewLibro extends Principal implements ActionListener {
 		
 		if (e.getSource() == submit) {
 			
-			int newIsbn = Integer.parseInt(isbn.getText());
-			String newTitulo = titulo.getText();
-			int newPaginas = Integer.parseInt(paginas.getText());
-			String newGenero = genero.getText();
-			Author authorToAdd = (Author)authorList.getSelectedItem();
-			
-			Book bookToAdd = new Book(newIsbn,newTitulo,newPaginas,newGenero,authorToAdd);
 			try {
+				
+				int newIsbn = Integer.parseInt(isbn.getText());
+				String newTitulo = titulo.getText();
+				int newPaginas = Integer.parseInt(paginas.getText());
+				String newGenero = genero.getText();
+				Author authorToAdd = (Author)authorList.getSelectedItem();
+				
+				Book bookToAdd = new Book(newIsbn,newTitulo,newPaginas,newGenero,authorToAdd);
 				bookControl.addBook(bookToAdd);
 				isbn.setText(Integer.toString(newIsbn++));
+				
 			} catch (BookException e1) {
-				JOptionPane.showMessageDialog(newLibro, "No pueden haber dos libros con el mismo ISBN");
+				JOptionPane.showMessageDialog(newLibro, "There can't be two books with the same ISBN");
+			} catch (java.lang.NumberFormatException e1) {
+				JOptionPane.showMessageDialog(newLibro, "Couldn't create, fields maybe invalid");
 			}
 			
 		} else if (e.getSource() == cancel) {

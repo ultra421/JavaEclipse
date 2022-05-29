@@ -9,38 +9,44 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import david.elias.controller.AuthorController;
 import david.elias.controller.BookController;
-import david.elias.exception.AuthorException;
 import david.elias.model.Author;
 import david.elias.model.Book;
 import java.util.ArrayList;
 
-public class Principal implements ActionListener, WindowListener {
+public class Main implements ActionListener, WindowListener {
+	
+	/* Initialize process 
+	 * 1- Read authors and add to array
+	 * 2- Read books and link to author array
+	 * 3- Open window add all buttons */
+	
+	// Saves when the program closes
 	
 	JButton newAuthor,modifyAuthor,removeAuthor,newBook,modifyBook,removeBook,searchBook;
-	//author y book == a una array de los controladores <- Comparten referencia
+	//author & book == controller array (shared reference)
 	public static ArrayList<Book> books;
 	public static ArrayList<Author> authors;
 	public static AuthorController authorControl;
 	public static BookController bookControl;
 	public static JFrame mainFrame;
 	
-	public Principal () {
+	public Main () {
 		
-		buildVentana();
+		buildWindow();
 		
 	}
 	
-	void buildVentana() {
+	void buildWindow() {
 		
 		
 		authors = new ArrayList<Author>();
 		books = new ArrayList<Book>();
-		//Añadira los autores existentes a la array
+		//Add existing authors to array
 		authorControl = new AuthorController();
-		//authorControl llena la array de Autores, entonces enviar a bookControl
-		//Añadira los libros existentes a la array
+		//authorControll fills authors, then send to bookControl
+		//Add existing books to array
 		bookControl = new BookController(authors);	
-		mainFrame = new JFrame("Biblioteca");
+		mainFrame = new JFrame("Library");
 		mainFrame.setLayout(new FlowLayout());
 		mainFrame.setSize(500,500);
 		mainFrame.addWindowListener(this);
@@ -52,34 +58,31 @@ public class Principal implements ActionListener, WindowListener {
 	
 	public void setButtons () {
 		
-		//TODO: Cambiar nombre final cuando este ordenado
-		//Autor
-		newAuthor = new JButton("Añadir Autor");
-		modifyAuthor = new JButton("Editar Autor");
-		removeAuthor = new JButton("Eliminar Autor");
-		//Libro
-		newBook = new JButton("Añadir libro");
-		modifyBook = new JButton("Editar libro");
-		removeBook = new JButton("Eliminar libro");
-		searchBook = new JButton("Buscar libro");
-		//Debug
+		//Author
+		newAuthor = new JButton("New author");
+		modifyAuthor = new JButton("Edit author");
+		removeAuthor = new JButton("Delete author");
+		//Book
+		newBook = new JButton("Add book");
+		modifyBook = new JButton("Modify book");
+		removeBook = new JButton("Delete book");
+		searchBook = new JButton("Search book");
 		
+		JButton buttons [] = new JButton [7];
 		
-		JButton botones [] = new JButton [7];
+		buttons[0] = newAuthor;
+		buttons[1] = modifyAuthor;
+		buttons[2] = removeAuthor;
+		buttons[3] = newBook;
+		buttons[4] = modifyBook;
+		buttons[5] = removeBook;
+		buttons[6] = searchBook;
 		
-		botones[0] = newAuthor;
-		botones[1] = modifyAuthor;
-		botones[2] = removeAuthor;
-		botones[3] = newBook;
-		botones[4] = modifyBook;
-		botones[5] = removeBook;
-		botones[6] = searchBook;
-		
-		for (int i = 0; i < botones.length; i++) {
+		for (int i = 0; i < buttons.length; i++) {
 			
-			botones[i].setSize(75,40);
-			botones[i].addActionListener(this);
-			mainFrame.add(botones[i]);
+			buttons[i].setSize(75,40);
+			buttons[i].addActionListener(this);
+			mainFrame.add(buttons[i]);
 			
 		}
 		
@@ -101,38 +104,40 @@ public class Principal implements ActionListener, WindowListener {
 			
 		} else if (e.getSource() == newBook) {
 			
-			new NewLibro();
+			new NewBook();
 			
 		} else if (e.getSource() == modifyBook) {
 			
-			new ModifyLibro();
+			new ModifyBook();
 			
 		} else if (e.getSource() == removeBook) {
 			
-			new RemoveLibro();
+			new RemoveBook();
 			
 		} else if (e.getSource() == searchBook) {
 			
-			new SearchLibro();
+			new SearchBook();
 			
 		}
 		
 	}
 	
+	@SuppressWarnings("unused")
 	public static void main (String args[]) {
 		
-		Principal principal = new Principal();
+		Main principal = new Main();
 		
 	}
 
 	@Override
 	public void windowOpened(WindowEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void windowClosing(WindowEvent e) {
+		
+		//When this windows closes print every array to matching file
 		
 		System.out.println("Closing the window and trying to Save...");
 		System.out.println("------Authors------");
