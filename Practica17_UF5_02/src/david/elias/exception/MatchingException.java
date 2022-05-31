@@ -1,12 +1,21 @@
 package david.elias.exception;
 
-public class MatchingException extends Throwable {
-	
+import david.elias.model.Author;
+
+public class MatchingException extends Throwable{
+
+	Author author;
 	String genero;
-	String autor;
+	
+	public MatchingException(Author author, String genero) {
+		
+		this.author = author;
+		this.genero = genero;
+		
+	}
 	
 	public String toString() {
-		return "No hay ninguna combinacion entre " + genero.toString() + " y " + autor.toString();
+		return "No hay ninguna combinacion que cumpla con los siguientes requisitos:";
 	}
-
+	
 }
