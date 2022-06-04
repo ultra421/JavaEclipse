@@ -13,10 +13,13 @@ import javax.swing.JTextField;
 
 public class SearchGenre extends Main implements ActionListener {
 	
-	JDialog createGenre;
-	
+	JDialog searchGenre;
+	JTextField id, description;
+	JButton search, cancel;
 	
 	public SearchGenre() {
+		
+		
 		
 	}
 	

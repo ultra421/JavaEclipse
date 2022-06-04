@@ -13,14 +13,19 @@ import javax.swing.JTextField;
 
 public class SearchMovie extends Main implements ActionListener {
 	
-	JDialog createGenre;
-	
+	JDialog searchMovie;
 	
 	public SearchMovie() {
 		
 	}
 	
 	void buildWindow() {
+		
+		searchMovie = new JDialog(main);
+		searchMovie.setTitle("Search movie");
+		searchMovie.setSize(400,450);
+		
+		
 		
 	}
 	

@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -52,9 +53,17 @@ public class CreateGenre extends Main implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		
-		if (e.getSource() == submit) {
+		if (e.getSource() == submit && description.getText() != null) {
+			
+			if (!generoControl.addGenero(description.getText())) {
+				
+				JOptionPane.showMessageDialog(createGenre, "Error adding a genre");
+				
+			}
 			
 		} else if (e.getSource() == cancel) {
+			
+			createGenre.dispose();
 			
 		}
 		
