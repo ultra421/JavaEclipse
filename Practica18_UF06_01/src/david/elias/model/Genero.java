@@ -27,16 +27,10 @@ public class Genero {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-
-	public String toStringFile() {
-		
-		return codigo + "$" + descripcion;
-		
-	}
 	
 	public String toString() {
 		
-		return descripcion;
+		return codigo + " - " + descripcion;
 		
 	}
 	

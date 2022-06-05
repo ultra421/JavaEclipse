@@ -38,8 +38,8 @@ public class Main implements ActionListener, WindowListener {
 		scan = new Scanner(System.in);
 		generos = new ArrayList<Genero>();
 		peliculas = new ArrayList<Pelicula>();
-		generoControl = new GeneroController(conn, generos);
-		peliControl = new PeliculaController(conn, peliculas);
+		generoControl = new GeneroController(conn);
+		peliControl = new PeliculaController(conn);
 		buildWindow();
 
 	}

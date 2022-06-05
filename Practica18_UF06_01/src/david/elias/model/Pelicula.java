@@ -5,7 +5,7 @@ public class Pelicula {
 	int codigo;
 	String titulo;
 	int codigoGenero;
-	int segundaParte;
+	Integer segundaParte;
 	
 	public Pelicula(int codigo, String titulo, int codigoGenero, int segundaParte) {
 		
@@ -13,6 +13,15 @@ public class Pelicula {
 		this.titulo = titulo;
 		this.codigoGenero = codigoGenero;
 		this.segundaParte = segundaParte;
+		
+	}
+	
+	public Pelicula(int codigo, String titulo, int codigoGenero) {
+	
+		this.codigo = codigo;
+		this.titulo = titulo;
+		this.codigoGenero = codigoGenero;
+		this.segundaParte = null;
 		
 	}
 
@@ -40,7 +49,7 @@ public class Pelicula {
 		this.codigoGenero = codigoGenero;
 	}
 
-	public int getSegundaParte() {
+	public Integer getSegundaParte() {
 		return segundaParte;
 	}
 
@@ -48,6 +57,8 @@ public class Pelicula {
 		this.segundaParte = segundaParte;
 	}
 	
-	
+	public String toString () {
+		return codigo + " - " + titulo;
+	}
 
 }
